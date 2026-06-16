@@ -141,6 +141,10 @@ class Deck{
     this.show(this.current+1);
   }
   prev(){
+    if(this.current<=0){
+      this.show(this.slides.length-1);
+      return;
+    }
     this.show(this.current-1);
   }
   show(index){
@@ -153,10 +157,13 @@ class Deck{
       slide.classList.remove('entering','leaving','frame-revealing');
       slide.style.setProperty('--dir',direction);
       const active=i===this.current;
-      if(i===previous&&previous!==this.current)slide.classList.add('leaving');
       slide.classList.toggle('active',active);
       slide.classList.toggle('frame-revealed',this.revealedFrames.has(i));
       slide.classList.toggle('video-focus',active&&slide.querySelector('video'));
+      slide.style.visibility=active?'visible':'hidden';
+      slide.style.opacity=active?'1':'0';
+      slide.style.pointerEvents=active?'auto':'none';
+      slide.style.zIndex=active?'2':'0';
       if(active){void slide.offsetWidth;slide.classList.add('entering')}
     });
     history.replaceState(null,'','#'+(this.current+1));
