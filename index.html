@@ -1,0 +1,154 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>微信表情包制作分享</title><style>
+*{box-sizing:border-box}
+html,body{width:100%;height:100%;margin:0;overflow:hidden;background:#fff}
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif}
+.viewport{position:fixed;inset:0;overflow:hidden;background:#fff}
+.stage{position:absolute;left:0;top:0;width:1920px;height:1080px;transform-origin:0 0;background:#fff;overflow:hidden}
+.slide{position:absolute;inset:0;width:1920px;height:1080px;background:#fff;overflow:hidden;visibility:hidden;opacity:0;pointer-events:none;transform-origin:center center;--dir:1}
+.slide.active{visibility:visible;opacity:1;pointer-events:auto;z-index:2}
+.slide.entering{animation:softIn .52s cubic-bezier(.22,.8,.22,1) both}
+.slide.leaving{visibility:visible;opacity:0;z-index:1;animation:softOut .34s cubic-bezier(.4,0,.2,1) both}
+.slide-image{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;filter:contrast(1.08) brightness(.99);transform-origin:center center}
+.red-frame-cover{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;pointer-events:none;opacity:1;transform-origin:center center}
+.slide.frame-revealed .red-frame-cover{opacity:0}
+.slide.has-red-frame.frame-revealing .red-frame-cover{animation:redFrameReveal .42s cubic-bezier(.18,.84,.22,1) both}
+.video-overlay{position:absolute;object-fit:cover;background:#fff;transform-origin:center center}
+.slide.video-focus.entering .video-overlay{animation:videoFocus .62s cubic-bezier(.22,.8,.22,1) both .06s}
+.hit{position:fixed;top:0;bottom:0;width:42%;z-index:10;border:0;background:transparent;padding:0;margin:0;appearance:none;-webkit-appearance:none;cursor:default;outline:0;box-shadow:none;-webkit-tap-highlight-color:transparent}
+.hit:focus,.hit:focus-visible,.hit:active{outline:0;box-shadow:none}
+.hit.prev{left:0}.hit.next{right:0}
+.demo-cursor{position:fixed;left:0;top:0;width:144px;height:auto;z-index:30;pointer-events:none;opacity:0;transform:translate3d(calc(var(--cursor-x,32px) - 8px),calc(var(--cursor-y,32px) - 42px),0);transition:opacity .18s ease,transform .045s linear}
+.demo-cursor.visible{opacity:1}
+.demo-cursor img{display:block;width:100%;height:auto}
+@keyframes softIn{
+  from{opacity:0;transform:scale(.988);filter:blur(.6px)}
+  to{opacity:1;transform:scale(1);filter:none}
+}
+@keyframes softOut{
+  from{opacity:1;transform:scale(1)}
+  to{opacity:0;transform:scale(1.006)}
+}
+@keyframes videoFocus{
+  0%{transform:scale(.985);filter:brightness(.98)}
+  70%{transform:scale(1.004);filter:brightness(1)}
+  100%{transform:scale(1);filter:none}
+}
+@keyframes redFrameReveal{
+  0%{opacity:1}
+  100%{opacity:0}
+}
+@media print{
+  html,body{width:1920px;height:auto;overflow:visible;background:#fff}
+  .viewport{position:static;overflow:visible;background:#fff}
+  .stage{position:static;width:auto;height:auto;transform:none!important}
+  .slide{position:relative;display:block;visibility:visible;opacity:1;pointer-events:auto;width:1920px;height:1080px;break-after:page;page-break-after:always}
+  .slide:last-child{break-after:auto;page-break-after:auto}
+  .hit,.demo-cursor{display:none}
+}
+@media (prefers-reduced-motion:reduce){*,::before,::after{animation:none!important;transition:none!important}}
+</style></head><body><div class="viewport"><main class="stage" id="stage"><section class="slide" data-slide="1"><img class="slide-image" src="rendered-4k/slide-001.png?v=red-frame-reveal-2" alt=""></section><section class="slide" data-slide="2"><img class="slide-image" src="rendered-4k/slide-002.png?v=red-frame-reveal-2" alt=""></section><section class="slide" data-slide="3"><img class="slide-image" src="rendered-4k/slide-003.png?v=red-frame-reveal-2" alt=""></section><section class="slide" data-slide="4"><img class="slide-image" src="rendered-4k/slide-004.png?v=red-frame-reveal-2" alt=""></section><section class="slide" data-slide="5"><img class="slide-image" src="rendered-4k/slide-005.png?v=red-frame-reveal-2" alt=""></section><section class="slide" data-slide="6"><img class="slide-image" src="rendered-4k/slide-006.png?v=red-frame-reveal-2" alt=""></section><section class="slide" data-slide="7"><img class="slide-image" src="rendered-4k/slide-007.png?v=red-frame-reveal-2" alt=""></section><section class="slide" data-slide="8"><img class="slide-image" src="rendered-4k/slide-008.png?v=red-frame-reveal-2" alt=""></section><section class="slide" data-slide="9"><img class="slide-image" src="rendered-4k/slide-009.png?v=red-frame-reveal-2" alt=""></section><section class="slide" data-slide="10"><img class="slide-image" src="rendered-4k/slide-010.png?v=red-frame-reveal-2" alt=""></section><section class="slide" data-slide="11"><img class="slide-image" src="rendered-4k/slide-011.png?v=red-frame-reveal-2" alt=""></section><section class="slide" data-slide="12"><img class="slide-image" src="rendered-4k/slide-012.png?v=red-frame-reveal-2" alt=""></section><section class="slide" data-slide="13"><img class="slide-image" src="rendered-4k/slide-013.png?v=red-frame-reveal-2" alt=""></section><section class="slide" data-slide="14"><img class="slide-image" src="rendered-4k/slide-014.png?v=red-frame-reveal-2" alt=""></section><section class="slide" data-slide="15"><img class="slide-image" src="rendered-4k/slide-015.png?v=red-frame-reveal-2" alt=""></section><section class="slide has-red-frame" data-slide="16"><img class="slide-image" src="rendered-4k/slide-016.png?v=red-frame-reveal-2" alt=""><img class="red-frame-cover" src="rendered-4k-frame-base/slide-016.png?v=red-frame-reveal-2" alt="" aria-hidden="true"></section><section class="slide has-red-frame" data-slide="17"><img class="slide-image" src="rendered-4k/slide-017.png?v=red-frame-reveal-2" alt=""><img class="red-frame-cover" src="rendered-4k-frame-base/slide-017.png?v=red-frame-reveal-2" alt="" aria-hidden="true"></section><section class="slide has-red-frame" data-slide="18"><img class="slide-image" src="rendered-4k/slide-018.png?v=red-frame-reveal-2" alt=""><img class="red-frame-cover" src="rendered-4k-frame-base/slide-018.png?v=red-frame-reveal-2" alt="" aria-hidden="true"></section><section class="slide" data-slide="19"><img class="slide-image" src="rendered-4k/slide-019.png?v=red-frame-reveal-2" alt=""></section><section class="slide" data-slide="20"><img class="slide-image" src="rendered-4k/slide-020.png?v=red-frame-reveal-2" alt=""></section><section class="slide" data-slide="21"><img class="slide-image" src="rendered-4k/slide-021.png?v=red-frame-reveal-2" alt=""></section><section class="slide" data-slide="22"><img class="slide-image" src="rendered-4k/slide-022.png?v=red-frame-reveal-2" alt=""></section><section class="slide has-red-frame" data-slide="23"><img class="slide-image" src="rendered-4k/slide-023.png?v=red-frame-reveal-2" alt=""><img class="red-frame-cover" src="rendered-4k-frame-base/slide-023.png?v=red-frame-reveal-2" alt="" aria-hidden="true"></section><section class="slide has-red-frame" data-slide="24"><img class="slide-image" src="rendered-4k/slide-024.png?v=red-frame-reveal-2" alt=""><img class="red-frame-cover" src="rendered-4k-frame-base/slide-024.png?v=red-frame-reveal-2" alt="" aria-hidden="true"></section><section class="slide has-red-frame" data-slide="25"><img class="slide-image" src="rendered-4k/slide-025.png?v=red-frame-reveal-2" alt=""><img class="red-frame-cover" src="rendered-4k-frame-base/slide-025.png?v=red-frame-reveal-2" alt="" aria-hidden="true"></section><section class="slide has-red-frame" data-slide="26"><img class="slide-image" src="rendered-4k/slide-026.png?v=red-frame-reveal-2" alt=""><img class="red-frame-cover" src="rendered-4k-frame-base/slide-026.png?v=red-frame-reveal-2" alt="" aria-hidden="true"></section><section class="slide has-red-frame" data-slide="27"><img class="slide-image" src="rendered-4k/slide-027.png?v=red-frame-reveal-2" alt=""><img class="red-frame-cover" src="rendered-4k-frame-base/slide-027.png?v=red-frame-reveal-2" alt="" aria-hidden="true"></section><section class="slide has-red-frame" data-slide="28"><img class="slide-image" src="rendered-4k/slide-028.png?v=red-frame-reveal-2" alt=""><img class="red-frame-cover" src="rendered-4k-frame-base/slide-028.png?v=red-frame-reveal-2" alt="" aria-hidden="true"></section><section class="slide has-red-frame" data-slide="29"><img class="slide-image" src="rendered-4k/slide-029.png?v=red-frame-reveal-2" alt=""><img class="red-frame-cover" src="rendered-4k-frame-base/slide-029.png?v=red-frame-reveal-2" alt="" aria-hidden="true"></section><section class="slide" data-slide="30"><img class="slide-image" src="rendered-4k/slide-030.png?v=red-frame-reveal-2" alt=""></section><section class="slide" data-slide="31"><img class="slide-image" src="rendered-4k/slide-031.png?v=red-frame-reveal-2" alt=""></section><section class="slide" data-slide="32"><img class="slide-image" src="rendered-4k/slide-032.png?v=red-frame-reveal-2" alt=""></section><section class="slide" data-slide="33"><img class="slide-image" src="rendered-4k/slide-033.png?v=red-frame-reveal-2" alt=""><video class="video-overlay" muted loop playsinline preload="auto" poster="ppt-faithful/media/slide-033-poster.png" style="left:717.8582677165355px;top:21.12488188976378px;width:484.2834645669291px;height:1037.7502362204725px" src="ppt-faithful/media/media1.mp4"></video></section><section class="slide" data-slide="34"><img class="slide-image" src="rendered-4k/slide-034.png?v=red-frame-reveal-2" alt=""></section><section class="slide" data-slide="35"><img class="slide-image" src="rendered-4k/slide-035.png?v=red-frame-reveal-2" alt=""></section><section class="slide" data-slide="36"><img class="slide-image" src="rendered-4k/slide-036.png?v=red-frame-reveal-2" alt=""></section><section class="slide" data-slide="37"><img class="slide-image" src="rendered-4k/slide-037.png?v=red-frame-reveal-2" alt=""></section><section class="slide" data-slide="38"><img class="slide-image" src="rendered-4k/slide-038.png?v=red-frame-reveal-2" alt=""></section><section class="slide" data-slide="39"><img class="slide-image" src="rendered-4k/slide-039.png?v=red-frame-reveal-2" alt=""></section><section class="slide" data-slide="40"><img class="slide-image" src="rendered-4k/slide-040.png?v=red-frame-reveal-2" alt=""></section><section class="slide" data-slide="41"><img class="slide-image" src="rendered-4k/slide-041.png?v=red-frame-reveal-2" alt=""></section><section class="slide" data-slide="42"><img class="slide-image" src="rendered-4k/slide-042.png?v=red-frame-reveal-2" alt=""></section><section class="slide" data-slide="43"><img class="slide-image" src="rendered-4k/slide-043.png?v=red-frame-reveal-2" alt=""></section><section class="slide" data-slide="44"><img class="slide-image" src="rendered-4k/slide-044.png?v=red-frame-reveal-2" alt=""></section><section class="slide" data-slide="45"><img class="slide-image" src="rendered-4k/slide-045.png?v=red-frame-reveal-2" alt=""></section><section class="slide" data-slide="46"><img class="slide-image" src="rendered-4k/slide-046.png?v=red-frame-reveal-2" alt=""></section><section class="slide" data-slide="47"><img class="slide-image" src="rendered-4k/slide-047.png?v=red-frame-reveal-2" alt=""></section><section class="slide" data-slide="48"><img class="slide-image" src="rendered-4k/slide-048.png?v=red-frame-reveal-2" alt=""></section><section class="slide" data-slide="49"><img class="slide-image" src="rendered-4k/slide-049.png?v=red-frame-reveal-2" alt=""></section><section class="slide" data-slide="50"><img class="slide-image" src="rendered-4k/slide-050.png?v=red-frame-reveal-2" alt=""></section><section class="slide" data-slide="51"><img class="slide-image" src="rendered-4k/slide-051.png?v=red-frame-reveal-2" alt=""></section><section class="slide" data-slide="52"><img class="slide-image" src="rendered-4k/slide-052.png?v=red-frame-reveal-2" alt=""></section><section class="slide" data-slide="53"><img class="slide-image" src="rendered-4k/slide-053.png?v=red-frame-reveal-2" alt=""></section><section class="slide" data-slide="54"><img class="slide-image" src="rendered-4k/slide-054.png?v=red-frame-reveal-2" alt=""></section><section class="slide" data-slide="55"><img class="slide-image" src="rendered-4k/slide-055.png?v=red-frame-reveal-2" alt=""></section><section class="slide" data-slide="56"><img class="slide-image" src="rendered-4k/slide-056.png?v=red-frame-reveal-2" alt=""></section><section class="slide" data-slide="57"><img class="slide-image" src="rendered-4k/slide-057.png?v=red-frame-reveal-2" alt=""></section><section class="slide" data-slide="58"><img class="slide-image" src="rendered-4k/slide-058.png?v=red-frame-reveal-2" alt=""></section><section class="slide" data-slide="59"><img class="slide-image" src="rendered-4k/slide-059.png?v=red-frame-reveal-2" alt=""></section><section class="slide" data-slide="60"><img class="slide-image" src="rendered-4k/slide-060.png?v=red-frame-reveal-2" alt=""></section><section class="slide" data-slide="61"><img class="slide-image" src="rendered-4k/slide-061.png?v=red-frame-reveal-2" alt=""></section><section class="slide" data-slide="62"><img class="slide-image" src="rendered-4k/slide-062.png?v=red-frame-reveal-2" alt=""></section><section class="slide" data-slide="63"><img class="slide-image" src="rendered-4k/slide-063.png?v=red-frame-reveal-2" alt=""></section><section class="slide" data-slide="64"><img class="slide-image" src="rendered-4k/slide-064.png?v=red-frame-reveal-2" alt=""></section><section class="slide" data-slide="65"><img class="slide-image" src="rendered-4k/slide-065.png?v=red-frame-reveal-2" alt=""></section></main></div><button class="hit prev" type="button" aria-label="上一页"></button><button class="hit next" type="button" aria-label="下一页"></button><div class="demo-cursor" aria-hidden="true"><img src="assets/arrange-cursor.png" alt=""></div><script>
+class Deck{
+  constructor(){
+    this.slides=[...document.querySelectorAll('.slide')];
+    this.stage=document.getElementById('stage');
+    this.current=0;
+    this.revealedFrames=new Set();
+    this.cursorSlideIndex=14;
+    this.prepareVideos();
+    this.prepareCursor();
+    this.scale();
+    addEventListener('resize',()=>this.scale());
+    document.addEventListener('keydown',e=>{
+      if(['ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();this.next();}
+      if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();this.prev();}
+      if(e.key==='Home'){e.preventDefault();this.show(0);}
+      if(e.key==='End'){e.preventDefault();this.show(this.slides.length-1);}
+    });
+    let sx=0;
+    addEventListener('touchstart',e=>sx=e.changedTouches[0].clientX,{passive:true});
+    addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>50)(dx<0?this.next():this.prev())},{passive:true});
+    document.querySelector('.hit.prev').onclick=()=>this.prev();
+    document.querySelector('.hit.next').onclick=()=>this.next();
+    this.show(Math.max(0,(parseInt(location.hash.slice(1),10)||1)-1));
+  }
+  prepareVideos(){
+    document.querySelectorAll('video').forEach(v=>{
+      v.muted=true;v.loop=true;v.playsInline=true;
+      v.setAttribute('muted','');v.setAttribute('loop','');v.setAttribute('playsinline','');
+    });
+  }
+  prepareCursor(){
+    this.cursor=document.querySelector('.demo-cursor');
+    this.pointer={x:32,y:32};
+    const move=(x,y)=>{
+      if(!this.cursor)return;
+      this.pointer={x,y};
+      this.cursor.style.setProperty('--cursor-x',x+'px');
+      this.cursor.style.setProperty('--cursor-y',y+'px');
+      this.updateCursorVisibility();
+    };
+    addEventListener('pointermove',e=>move(e.clientX,e.clientY),{passive:true});
+    addEventListener('touchmove',e=>{
+      const touch=e.changedTouches&&e.changedTouches[0];
+      if(touch)move(touch.clientX,touch.clientY);
+    },{passive:true});
+  }
+  updateCursorVisibility(){
+    if(!this.cursor)return;
+    this.cursor.classList.toggle('visible',this.current===this.cursorSlideIndex);
+  }
+  scale(){
+    const factor=Math.min(innerWidth/1920,innerHeight/1080);
+    this.stage.style.transform=`translate(${(innerWidth-1920*factor)/2}px,${(innerHeight-1080*factor)/2}px) scale(${factor})`;
+  }
+  syncVideos(){
+    this.slides.forEach((slide,index)=>{
+      slide.querySelectorAll('video').forEach(video=>{
+        if(index===this.current){
+          try{video.currentTime=0}catch(error){}
+          const play=video.play();
+          if(play&&play.catch)play.catch(()=>{});
+        }else{
+          video.pause();
+        }
+      });
+    });
+  }
+  revealFrame(){
+    const slide=this.slides[this.current];
+    if(!slide.classList.contains('has-red-frame')||this.revealedFrames.has(this.current))return false;
+    this.revealedFrames.add(this.current);
+    slide.classList.add('frame-revealed','frame-revealing');
+    slide.addEventListener('animationend',()=>slide.classList.remove('frame-revealing'),{once:true});
+    return true;
+  }
+  next(){
+    if(this.revealFrame())return;
+    this.show(this.current+1);
+  }
+  prev(){
+    this.show(this.current-1);
+  }
+  show(index){
+    const next=Math.max(0,Math.min(index,this.slides.length-1));
+    if(next===this.current&&this.slides[next].classList.contains('active')){this.syncVideos();return}
+    const previous=this.current;
+    const direction=next>=previous?1:-1;
+    this.current=next;
+    this.slides.forEach((slide,i)=>{
+      slide.classList.remove('entering','leaving','frame-revealing');
+      slide.style.setProperty('--dir',direction);
+      const active=i===this.current;
+      if(i===previous&&previous!==this.current)slide.classList.add('leaving');
+      slide.classList.toggle('active',active);
+      slide.classList.toggle('frame-revealed',this.revealedFrames.has(i));
+      slide.classList.toggle('video-focus',active&&slide.querySelector('video'));
+      if(active){void slide.offsetWidth;slide.classList.add('entering')}
+    });
+    history.replaceState(null,'','#'+(this.current+1));
+    this.syncVideos();
+    this.updateCursorVisibility();
+  }
+}
+window.deck=new Deck();
+</script></body></html>
