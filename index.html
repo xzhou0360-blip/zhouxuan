@@ -5,6 +5,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans G
 .viewport{position:fixed;inset:0;overflow:hidden;background:#fff}
 .stage{position:absolute;left:0;top:0;width:1920px;height:1080px;transform-origin:0 0;background:#fff;overflow:hidden}
 .slide{position:absolute;inset:0;width:1920px;height:1080px;background:#fff;overflow:hidden;visibility:hidden;opacity:0;pointer-events:none;transform-origin:center center;--dir:1}
+.slide:first-child{visibility:visible;opacity:1;pointer-events:auto;z-index:1}
 .slide.active{visibility:visible;opacity:1;pointer-events:auto;z-index:2}
 .slide.entering{animation:softIn .52s cubic-bezier(.22,.8,.22,1) both}
 .slide.leaving{visibility:visible;opacity:0;z-index:1;animation:softOut .34s cubic-bezier(.4,0,.2,1) both}
@@ -150,5 +151,19 @@ class Deck{
     this.updateCursorVisibility();
   }
 }
-window.deck=new Deck();
+function ensureFallbackSlide(){
+  const firstSlide=document.querySelector('.slide');
+  if(!firstSlide)return;
+  firstSlide.classList.add('active');
+  firstSlide.style.visibility='visible';
+  firstSlide.style.opacity='1';
+  firstSlide.style.pointerEvents='auto';
+}
+ensureFallbackSlide();
+try{
+  window.deck=new Deck();
+}catch(error){
+  console.error(error);
+  ensureFallbackSlide();
+}
 </script></body></html>
