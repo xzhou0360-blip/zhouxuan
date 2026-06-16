@@ -4,10 +4,10 @@ html,body{width:100%;height:100%;margin:0;overflow:hidden;background:#fff}
 body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif}
 .viewport{position:fixed;inset:0;overflow:hidden;background:#fff}
 .stage{position:absolute;left:0;top:0;width:1920px;height:1080px;transform-origin:0 0;background:#fff;overflow:hidden}
-.slide{position:absolute;inset:0;width:1920px;height:1080px;background:#fff;overflow:hidden;visibility:hidden;opacity:0;pointer-events:none;transform-origin:center center;--dir:1}
+.slide{position:absolute;inset:0;width:1920px;height:1080px;background:#fff;overflow:hidden;visibility:hidden;opacity:0;pointer-events:none;transform-origin:center center;z-index:0;--dir:1}
 .slide.active{visibility:visible;opacity:1;pointer-events:auto;z-index:2}
-.slide.entering{animation:softIn .52s cubic-bezier(.22,.8,.22,1) both}
-.slide.leaving{visibility:visible;opacity:0;z-index:1;animation:softOut .34s cubic-bezier(.4,0,.2,1) both}
+.slide.entering{animation:softIn .32s cubic-bezier(.22,.8,.22,1) both}
+.slide.leaving{visibility:hidden;opacity:0;z-index:0;animation:none}
 .slide-image{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;filter:contrast(1.08) brightness(.99);transform-origin:center center}
 .red-frame-cover{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;pointer-events:none;opacity:1;transform-origin:center center}
 .slide.frame-revealed .red-frame-cover{opacity:0}
@@ -21,12 +21,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans G
 .demo-cursor.visible{opacity:1}
 .demo-cursor img{display:block;width:100%;height:auto}
 @keyframes softIn{
-  from{opacity:0;transform:scale(.988);filter:blur(.6px)}
+  from{opacity:.94;transform:scale(.996);filter:none}
   to{opacity:1;transform:scale(1);filter:none}
-}
-@keyframes softOut{
-  from{opacity:1;transform:scale(1)}
-  to{opacity:0;transform:scale(1.006)}
 }
 @keyframes videoFocus{
   0%{transform:scale(.985);filter:brightness(.98)}
