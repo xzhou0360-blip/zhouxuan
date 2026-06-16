@@ -134,6 +134,10 @@ class Deck{
   }
   next(){
     if(this.revealFrame())return;
+    if(this.current>=this.slides.length-1){
+      this.show(0);
+      return;
+    }
     this.show(this.current+1);
   }
   prev(){
