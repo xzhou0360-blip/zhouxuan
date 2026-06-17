@@ -175,7 +175,8 @@
         this.frameSlides = new Set([16, 17, 18, 23, 24, 25, 26, 27, 28, 29]);
         this.revealedFrames = new Set();
         this.cursorStartSlide = 15;
-        this.version = "red-frame-reveal-3";
+        this.version = "red-frame-reveal-4";
+        this.preloaded = new Set();
         this.slide = document.getElementById("slide");
         this.slideImage = document.getElementById("slideImage");
         this.redFrameCover = document.getElementById("redFrameCover");
@@ -200,6 +201,23 @@
       }
       frameSrc(n) {
         return `rendered-webp-frame-base/slide-${this.pad(n)}.webp?v=${this.version}`;
+      }
+      preloadImage(src) {
+        if (!src || this.preloaded.has(src)) return;
+        this.preloaded.add(src);
+        const img = new Image();
+        img.decoding = "async";
+        img.src = src;
+      }
+      warmAround(n) {
+        const targets = [n - 2, n - 1, n + 1, n + 2]
+          .map((value) => value < 1 ? this.totalSlides + value : value > this.totalSlides ? value - this.totalSlides : value);
+        for (const page of targets) {
+          this.preloadImage(this.imageSrc(page));
+          if (this.frameSlides.has(page)) this.preloadImage(this.frameSrc(page));
+        }
+        this.preloadImage("assets/arrange-cursor.png");
+        this.preloadImage("ppt-faithful/media/slide-033-poster.png");
       }
       bind() {
         addEventListener("resize", () => this.scale());
@@ -298,6 +316,7 @@
         }
         this.syncVideo();
         this.updateCursorVisibility();
+        this.warmAround(this.current);
         history.replaceState(null, "", `#${this.current}`);
       }
       revealFrame() {
@@ -337,6 +356,11 @@
     }
     addEventListener("load", () => window.deck && window.deck.scale(), { once: true });
     addEventListener("pageshow", () => window.deck && window.deck.scale());
+    if ("serviceWorker" in navigator) {
+      addEventListener("load", () => {
+        navigator.serviceWorker.register("./sw.js").catch(() => {});
+      }, { once: true });
+    }
   </script>
 </body>
 </html>
