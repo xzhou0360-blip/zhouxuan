@@ -1,179 +1,317 @@
-<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>微信表情包制作分享</title><style>
-*{box-sizing:border-box}
-html,body{width:100%;height:100%;margin:0;overflow:hidden;background:#fff}
-body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif}
-.viewport{position:fixed;inset:0;overflow:hidden;background:#fff}
-.stage{position:absolute;left:0;top:0;width:1920px;height:1080px;transform-origin:0 0;background:#fff;overflow:hidden}
-.slide{position:absolute;inset:0;width:1920px;height:1080px;background:#fff;overflow:hidden;visibility:hidden;opacity:0;pointer-events:none;transform-origin:center center;z-index:0;--dir:1}
-.slide.active{visibility:visible;opacity:1;pointer-events:auto;z-index:2}
-.slide.entering{animation:softIn .32s cubic-bezier(.22,.8,.22,1) both}
-.slide.leaving{visibility:hidden;opacity:0;z-index:0;animation:none}
-.slide-image{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;filter:contrast(1.08) brightness(.99);transform-origin:center center}
-.red-frame-cover{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;pointer-events:none;opacity:1;transform-origin:center center}
-.slide.frame-revealed .red-frame-cover{opacity:0}
-.slide.has-red-frame.frame-revealing .red-frame-cover{animation:redFrameReveal .42s cubic-bezier(.18,.84,.22,1) both}
-.video-overlay{position:absolute;object-fit:cover;background:#fff;transform-origin:center center}
-.slide.video-focus.entering .video-overlay{animation:videoFocus .62s cubic-bezier(.22,.8,.22,1) both .06s}
-.hit{position:fixed;top:0;bottom:0;width:42%;z-index:10;border:0;background:transparent;padding:0;margin:0;appearance:none;-webkit-appearance:none;cursor:default;outline:0;box-shadow:none;-webkit-tap-highlight-color:transparent}
-.hit:focus,.hit:focus-visible,.hit:active{outline:0;box-shadow:none}
-.hit.prev{left:0}.hit.next{right:0}
-.demo-cursor{position:fixed;left:0;top:0;width:144px;height:auto;z-index:30;pointer-events:none;opacity:0;transform:translate3d(calc(var(--cursor-x,32px) - 8px),calc(var(--cursor-y,32px) - 42px),0);transition:opacity .18s ease,transform .045s linear}
-.demo-cursor.visible{opacity:1}
-.demo-cursor img{display:block;width:100%;height:auto}
-@keyframes softIn{
-  from{opacity:.94;transform:scale(.996);filter:none}
-  to{opacity:1;transform:scale(1);filter:none}
-}
-@keyframes videoFocus{
-  0%{transform:scale(.985);filter:brightness(.98)}
-  70%{transform:scale(1.004);filter:brightness(1)}
-  100%{transform:scale(1);filter:none}
-}
-@keyframes redFrameReveal{
-  0%{opacity:1}
-  100%{opacity:0}
-}
-@media print{
-  html,body{width:1920px;height:auto;overflow:visible;background:#fff}
-  .viewport{position:static;overflow:visible;background:#fff}
-  .stage{position:static;width:auto;height:auto;transform:none!important}
-  .slide{position:relative;display:block;visibility:visible;opacity:1;pointer-events:auto;width:1920px;height:1080px;break-after:page;page-break-after:always}
-  .slide:last-child{break-after:auto;page-break-after:auto}
-  .hit,.demo-cursor{display:none}
-}
-@media (prefers-reduced-motion:reduce){*,::before,::after{animation:none!important;transition:none!important}}
-</style></head><body><div class="viewport"><main class="stage" id="stage"><section class="slide active" data-slide="1"><img class="slide-image" src="rendered-webp/slide-001.webp?v=red-frame-reveal-2" alt=""></section><section class="slide" data-slide="2"><img class="slide-image" src="rendered-webp/slide-002.webp?v=red-frame-reveal-2" alt="" decoding="async"></section><section class="slide" data-slide="3"><img class="slide-image" src="rendered-webp/slide-003.webp?v=red-frame-reveal-2" alt="" decoding="async"></section><section class="slide" data-slide="4"><img class="slide-image" src="rendered-webp/slide-004.webp?v=red-frame-reveal-2" alt="" decoding="async"></section><section class="slide" data-slide="5"><img class="slide-image" src="rendered-webp/slide-005.webp?v=red-frame-reveal-2" alt="" decoding="async"></section><section class="slide" data-slide="6"><img class="slide-image" src="rendered-webp/slide-006.webp?v=red-frame-reveal-2" alt="" decoding="async"></section><section class="slide" data-slide="7"><img class="slide-image" src="rendered-webp/slide-007.webp?v=red-frame-reveal-2" alt="" decoding="async"></section><section class="slide" data-slide="8"><img class="slide-image" src="rendered-webp/slide-008.webp?v=red-frame-reveal-2" alt="" decoding="async"></section><section class="slide" data-slide="9"><img class="slide-image" src="rendered-webp/slide-009.webp?v=red-frame-reveal-2" alt="" decoding="async"></section><section class="slide" data-slide="10"><img class="slide-image" src="rendered-webp/slide-010.webp?v=red-frame-reveal-2" alt="" decoding="async"></section><section class="slide" data-slide="11"><img class="slide-image" src="rendered-webp/slide-011.webp?v=red-frame-reveal-2" alt="" decoding="async"></section><section class="slide" data-slide="12"><img class="slide-image" src="rendered-webp/slide-012.webp?v=red-frame-reveal-2" alt="" decoding="async"></section><section class="slide" data-slide="13"><img class="slide-image" src="rendered-webp/slide-013.webp?v=red-frame-reveal-2" alt="" decoding="async"></section><section class="slide" data-slide="14"><img class="slide-image" src="rendered-webp/slide-014.webp?v=red-frame-reveal-2" alt="" decoding="async"></section><section class="slide" data-slide="15"><img class="slide-image" src="rendered-webp/slide-015.webp?v=red-frame-reveal-2" alt="" decoding="async"></section><section class="slide has-red-frame" data-slide="16"><img class="slide-image" src="rendered-webp/slide-016.webp?v=red-frame-reveal-2" alt="" decoding="async"><img class="red-frame-cover" src="rendered-webp-frame-base/slide-016.webp?v=red-frame-reveal-2" alt="" decoding="async"></section><section class="slide has-red-frame" data-slide="17"><img class="slide-image" src="rendered-webp/slide-017.webp?v=red-frame-reveal-2" alt="" decoding="async"><img class="red-frame-cover" src="rendered-webp-frame-base/slide-017.webp?v=red-frame-reveal-2" alt="" decoding="async"></section><section class="slide has-red-frame" data-slide="18"><img class="slide-image" src="rendered-webp/slide-018.webp?v=red-frame-reveal-2" alt="" decoding="async"><img class="red-frame-cover" src="rendered-webp-frame-base/slide-018.webp?v=red-frame-reveal-2" alt="" decoding="async"></section><section class="slide" data-slide="19"><img class="slide-image" src="rendered-webp/slide-019.webp?v=red-frame-reveal-2" alt="" decoding="async"></section><section class="slide" data-slide="20"><img class="slide-image" src="rendered-webp/slide-020.webp?v=red-frame-reveal-2" alt="" decoding="async"></section><section class="slide" data-slide="21"><img class="slide-image" src="rendered-webp/slide-021.webp?v=red-frame-reveal-2" alt="" decoding="async"></section><section class="slide" data-slide="22"><img class="slide-image" src="rendered-webp/slide-022.webp?v=red-frame-reveal-2" alt="" decoding="async"></section><section class="slide has-red-frame" data-slide="23"><img class="slide-image" src="rendered-webp/slide-023.webp?v=red-frame-reveal-2" alt="" decoding="async"><img class="red-frame-cover" src="rendered-webp-frame-base/slide-023.webp?v=red-frame-reveal-2" alt="" decoding="async"></section><section class="slide has-red-frame" data-slide="24"><img class="slide-image" src="rendered-webp/slide-024.webp?v=red-frame-reveal-2" alt="" decoding="async"><img class="red-frame-cover" src="rendered-webp-frame-base/slide-024.webp?v=red-frame-reveal-2" alt="" decoding="async"></section><section class="slide has-red-frame" data-slide="25"><img class="slide-image" src="rendered-webp/slide-025.webp?v=red-frame-reveal-2" alt="" decoding="async"><img class="red-frame-cover" src="rendered-webp-frame-base/slide-025.webp?v=red-frame-reveal-2" alt="" decoding="async"></section><section class="slide has-red-frame" data-slide="26"><img class="slide-image" src="rendered-webp/slide-026.webp?v=red-frame-reveal-2" alt="" decoding="async"><img class="red-frame-cover" src="rendered-webp-frame-base/slide-026.webp?v=red-frame-reveal-2" alt="" decoding="async"></section><section class="slide has-red-frame" data-slide="27"><img class="slide-image" src="rendered-webp/slide-027.webp?v=red-frame-reveal-2" alt="" decoding="async"><img class="red-frame-cover" src="rendered-webp-frame-base/slide-027.webp?v=red-frame-reveal-2" alt="" decoding="async"></section><section class="slide has-red-frame" data-slide="28"><img class="slide-image" src="rendered-webp/slide-028.webp?v=red-frame-reveal-2" alt="" decoding="async"><img class="red-frame-cover" src="rendered-webp-frame-base/slide-028.webp?v=red-frame-reveal-2" alt="" decoding="async"></section><section class="slide has-red-frame" data-slide="29"><img class="slide-image" src="rendered-webp/slide-029.webp?v=red-frame-reveal-2" alt="" decoding="async"><img class="red-frame-cover" src="rendered-webp-frame-base/slide-029.webp?v=red-frame-reveal-2" alt="" decoding="async"></section><section class="slide" data-slide="30"><img class="slide-image" src="rendered-webp/slide-030.webp?v=red-frame-reveal-2" alt="" decoding="async"></section><section class="slide" data-slide="31"><img class="slide-image" src="rendered-webp/slide-031.webp?v=red-frame-reveal-2" alt="" decoding="async"></section><section class="slide" data-slide="32"><img class="slide-image" src="rendered-webp/slide-032.webp?v=red-frame-reveal-2" alt="" decoding="async"></section><section class="slide" data-slide="33"><img class="slide-image" src="rendered-webp/slide-033.webp?v=red-frame-reveal-2" alt="" decoding="async"><video class="video-overlay" muted loop playsinline preload="none" data-poster="ppt-faithful/media/slide-033-poster.png" style="left:717.8582677165355px;top:21.12488188976378px;width:484.2834645669291px;height:1037.7502362204725px" data-src="ppt-faithful/media/media1.mp4"></video></section><section class="slide" data-slide="34"><img class="slide-image" src="rendered-webp/slide-034.webp?v=red-frame-reveal-2" alt="" decoding="async"></section><section class="slide" data-slide="35"><img class="slide-image" src="rendered-webp/slide-035.webp?v=red-frame-reveal-2" alt="" decoding="async"></section><section class="slide" data-slide="36"><img class="slide-image" src="rendered-webp/slide-036.webp?v=red-frame-reveal-2" alt="" decoding="async"></section><section class="slide" data-slide="37"><img class="slide-image" src="rendered-webp/slide-037.webp?v=red-frame-reveal-2" alt="" decoding="async"></section><section class="slide" data-slide="38"><img class="slide-image" src="rendered-webp/slide-038.webp?v=red-frame-reveal-2" alt="" decoding="async"></section><section class="slide" data-slide="39"><img class="slide-image" src="rendered-webp/slide-039.webp?v=red-frame-reveal-2" alt="" decoding="async"></section><section class="slide" data-slide="40"><img class="slide-image" src="rendered-webp/slide-040.webp?v=red-frame-reveal-2" alt="" decoding="async"></section><section class="slide" data-slide="41"><img class="slide-image" src="rendered-webp/slide-041.webp?v=red-frame-reveal-2" alt="" decoding="async"></section><section class="slide" data-slide="42"><img class="slide-image" src="rendered-webp/slide-042.webp?v=red-frame-reveal-2" alt="" decoding="async"></section><section class="slide" data-slide="43"><img class="slide-image" src="rendered-webp/slide-043.webp?v=red-frame-reveal-2" alt="" decoding="async"></section><section class="slide" data-slide="44"><img class="slide-image" src="rendered-webp/slide-044.webp?v=red-frame-reveal-2" alt="" decoding="async"></section><section class="slide" data-slide="45"><img class="slide-image" src="rendered-webp/slide-045.webp?v=red-frame-reveal-2" alt="" decoding="async"></section><section class="slide" data-slide="46"><img class="slide-image" src="rendered-webp/slide-046.webp?v=red-frame-reveal-2" alt="" decoding="async"></section><section class="slide" data-slide="47"><img class="slide-image" src="rendered-webp/slide-047.webp?v=red-frame-reveal-2" alt="" decoding="async"></section><section class="slide" data-slide="48"><img class="slide-image" src="rendered-webp/slide-048.webp?v=red-frame-reveal-2" alt="" decoding="async"></section><section class="slide" data-slide="49"><img class="slide-image" src="rendered-webp/slide-049.webp?v=red-frame-reveal-2" alt="" decoding="async"></section><section class="slide" data-slide="50"><img class="slide-image" src="rendered-webp/slide-050.webp?v=red-frame-reveal-2" alt="" decoding="async"></section><section class="slide" data-slide="51"><img class="slide-image" src="rendered-webp/slide-051.webp?v=red-frame-reveal-2" alt="" decoding="async"></section><section class="slide" data-slide="52"><img class="slide-image" src="rendered-webp/slide-052.webp?v=red-frame-reveal-2" alt="" decoding="async"></section><section class="slide" data-slide="53"><img class="slide-image" src="rendered-webp/slide-053.webp?v=red-frame-reveal-2" alt="" decoding="async"></section><section class="slide" data-slide="54"><img class="slide-image" src="rendered-webp/slide-054.webp?v=red-frame-reveal-2" alt="" decoding="async"></section><section class="slide" data-slide="55"><img class="slide-image" src="rendered-webp/slide-055.webp?v=red-frame-reveal-2" alt="" decoding="async"></section><section class="slide" data-slide="56"><img class="slide-image" src="rendered-webp/slide-056.webp?v=red-frame-reveal-2" alt="" decoding="async"></section><section class="slide" data-slide="57"><img class="slide-image" src="rendered-webp/slide-057.webp?v=red-frame-reveal-2" alt="" decoding="async"></section><section class="slide" data-slide="58"><img class="slide-image" src="rendered-webp/slide-058.webp?v=red-frame-reveal-2" alt="" decoding="async"></section><section class="slide" data-slide="59"><img class="slide-image" src="rendered-webp/slide-059.webp?v=red-frame-reveal-2" alt="" decoding="async"></section><section class="slide" data-slide="60"><img class="slide-image" src="rendered-webp/slide-060.webp?v=red-frame-reveal-2" alt="" decoding="async"></section><section class="slide" data-slide="61"><img class="slide-image" src="rendered-webp/slide-061.webp?v=red-frame-reveal-2" alt="" decoding="async"></section><section class="slide" data-slide="62"><img class="slide-image" src="rendered-webp/slide-062.webp?v=red-frame-reveal-2" alt="" decoding="async"></section><section class="slide" data-slide="63"><img class="slide-image" src="rendered-webp/slide-063.webp?v=red-frame-reveal-2" alt="" decoding="async"></section><section class="slide" data-slide="64"><img class="slide-image" src="rendered-webp/slide-064.webp?v=red-frame-reveal-2" alt="" decoding="async"></section><section class="slide" data-slide="65"><img class="slide-image" src="rendered-webp/slide-065.webp?v=red-frame-reveal-2" alt="" decoding="async"></section></main></div><button class="hit prev" type="button" aria-label="上一页"></button><button class="hit next" type="button" aria-label="下一页"></button><div class="demo-cursor" aria-hidden="true"><img src="assets/arrange-cursor.png" alt=""></div><script>
-class Deck{
-  constructor(){
-    this.slides=[...document.querySelectorAll('.slide')];
-    this.stage=document.getElementById('stage');
-    this.current=0;
-    this.revealedFrames=new Set();
-    this.cursorStartIndex=14;
-    this.prepareVideos();
-    this.prepareCursor();
-    this.scale();
-    addEventListener('resize',()=>this.scale());
-    document.addEventListener('keydown',e=>{
-      if(['ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();this.next();}
-      if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();this.prev();}
-      if(e.key==='Home'){e.preventDefault();this.show(0);}
-      if(e.key==='End'){e.preventDefault();this.show(this.slides.length-1);}
-    });
-    let sx=0;
-    addEventListener('touchstart',e=>sx=e.changedTouches[0].clientX,{passive:true});
-    addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>50)(dx<0?this.next():this.prev())},{passive:true});
-    document.querySelector('.hit.prev').onclick=()=>this.prev();
-    document.querySelector('.hit.next').onclick=()=>this.next();
-    this.show(Math.max(0,(parseInt(location.hash.slice(1),10)||1)-1));
-  }
-  loadVideo(video){
-    if(!video||video.dataset.loaded==='true')return;
-    if(video.dataset.poster){
-      video.poster=video.dataset.poster;
-      video.removeAttribute('data-poster');
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>微信表情包制作分享</title>
+  <style>
+    * { box-sizing: border-box; }
+    html, body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+      background: #fff;
     }
-    if(video.dataset.src){
-      video.src=video.dataset.src;
-      video.removeAttribute('data-src');
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
     }
-    video.load();
-    video.dataset.loaded='true';
-  }
-  prepareVideos(){
-    document.querySelectorAll('video').forEach(v=>{
-      v.muted=true;v.loop=true;v.playsInline=true;
-      v.setAttribute('muted','');v.setAttribute('loop','');v.setAttribute('playsinline','');
-    });
-  }
-  prepareCursor(){
-    this.cursor=document.querySelector('.demo-cursor');
-    this.pointer={x:32,y:32};
-    const move=(x,y)=>{
-      if(!this.cursor)return;
-      this.pointer={x,y};
-      this.cursor.style.setProperty('--cursor-x',x+'px');
-      this.cursor.style.setProperty('--cursor-y',y+'px');
-      this.updateCursorVisibility();
-    };
-    addEventListener('pointermove',e=>move(e.clientX,e.clientY),{passive:true});
-    addEventListener('touchmove',e=>{
-      const touch=e.changedTouches&&e.changedTouches[0];
-      if(touch)move(touch.clientX,touch.clientY);
-    },{passive:true});
-  }
-  updateCursorVisibility(){
-    if(!this.cursor)return;
-    this.cursor.classList.toggle('visible',this.current>=this.cursorStartIndex);
-  }
-  scale(){
-    const factor=Math.min(innerWidth/1920,innerHeight/1080);
-    this.stage.style.transform=`translate(${(innerWidth-1920*factor)/2}px,${(innerHeight-1080*factor)/2}px) scale(${factor})`;
-  }
-  syncVideos(){
-    this.slides.forEach((slide,index)=>{
-      slide.querySelectorAll('video').forEach(video=>{
-        if(index===this.current){
-          this.loadVideo(video);
-          try{video.currentTime=0}catch(error){}
-          const play=video.play();
-          if(play&&play.catch)play.catch(()=>{});
-        }else{
-          video.pause();
+    .viewport {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      background: #fff;
+    }
+    .stage {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 1920px;
+      height: 1080px;
+      transform-origin: 0 0;
+      background: #fff;
+      overflow: hidden;
+    }
+    .slide {
+      position: absolute;
+      inset: 0;
+      width: 1920px;
+      height: 1080px;
+      background: #fff;
+      overflow: hidden;
+    }
+    .slide.entering {
+      animation: softIn .24s cubic-bezier(.22,.8,.22,1) both;
+    }
+    .slide-image,
+    .red-frame-cover {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .red-frame-cover {
+      pointer-events: none;
+      opacity: 0;
+    }
+    .red-frame-cover.visible {
+      opacity: 1;
+    }
+    .red-frame-cover.revealing {
+      animation: redFrameReveal .42s cubic-bezier(.18,.84,.22,1) both;
+    }
+    .video-overlay {
+      position: absolute;
+      left: 717.8582677165355px;
+      top: 21.12488188976378px;
+      width: 484.2834645669291px;
+      height: 1037.7502362204725px;
+      object-fit: cover;
+      background: #fff;
+      display: none;
+    }
+    .video-overlay.visible {
+      display: block;
+      animation: videoFocus .42s cubic-bezier(.22,.8,.22,1) both;
+    }
+    .hit {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      width: 42%;
+      z-index: 10;
+      border: 0;
+      background: transparent;
+      padding: 0;
+      margin: 0;
+      appearance: none;
+      -webkit-appearance: none;
+      cursor: default;
+      outline: 0;
+      box-shadow: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .hit:focus,
+    .hit:focus-visible,
+    .hit:active {
+      outline: 0;
+      box-shadow: none;
+    }
+    .hit.prev { left: 0; }
+    .hit.next { right: 0; }
+    .demo-cursor {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 144px;
+      height: auto;
+      z-index: 30;
+      pointer-events: none;
+      opacity: 0;
+      transform: translate3d(calc(var(--cursor-x,32px) - 8px), calc(var(--cursor-y,32px) - 42px), 0);
+      transition: opacity .18s ease, transform .045s linear;
+    }
+    .demo-cursor.visible {
+      opacity: 1;
+    }
+    .demo-cursor img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    @keyframes softIn {
+      from { opacity: .96; transform: scale(.997); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    @keyframes videoFocus {
+      0% { transform: scale(.985); filter: brightness(.98); }
+      100% { transform: scale(1); filter: none; }
+    }
+    @keyframes redFrameReveal {
+      0% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+    @media print {
+      .hit, .demo-cursor { display: none; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, ::before, ::after {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="viewport">
+    <main class="stage" id="stage">
+      <section class="slide" id="slide">
+        <img class="slide-image" id="slideImage" src="" alt="">
+        <img class="red-frame-cover" id="redFrameCover" src="" alt="" aria-hidden="true">
+        <video
+          class="video-overlay"
+          id="videoOverlay"
+          muted
+          loop
+          playsinline
+          preload="none"
+          poster="ppt-faithful/media/slide-033-poster.png"
+          src="ppt-faithful/media/media1.mp4"></video>
+      </section>
+    </main>
+  </div>
+  <button class="hit prev" type="button" aria-label="上一页"></button>
+  <button class="hit next" type="button" aria-label="下一页"></button>
+  <div class="demo-cursor" id="demoCursor" aria-hidden="true">
+    <img src="assets/arrange-cursor.png" alt="">
+  </div>
+  <script>
+    class Deck {
+      constructor() {
+        this.totalSlides = 65;
+        this.current = this.parseHash();
+        this.frameSlides = new Set([16, 17, 18, 23, 24, 25, 26, 27, 28, 29]);
+        this.revealedFrames = new Set();
+        this.cursorStartSlide = 15;
+        this.version = "red-frame-reveal-2";
+        this.slide = document.getElementById("slide");
+        this.slideImage = document.getElementById("slideImage");
+        this.redFrameCover = document.getElementById("redFrameCover");
+        this.videoOverlay = document.getElementById("videoOverlay");
+        this.stage = document.getElementById("stage");
+        this.cursor = document.getElementById("demoCursor");
+        this.pointer = { x: 32, y: 32 };
+        this.bind();
+        this.scale();
+        this.render(false);
+      }
+      parseHash() {
+        const raw = parseInt(location.hash.slice(1), 10);
+        if (!Number.isFinite(raw)) return 1;
+        return Math.max(1, Math.min(raw, 65));
+      }
+      pad(n) {
+        return String(n).padStart(3, "0");
+      }
+      imageSrc(n) {
+        return `rendered-webp/slide-${this.pad(n)}.webp?v=${this.version}`;
+      }
+      frameSrc(n) {
+        return `rendered-webp-frame-base/slide-${this.pad(n)}.webp?v=${this.version}`;
+      }
+      bind() {
+        addEventListener("resize", () => this.scale());
+        addEventListener("hashchange", () => {
+          this.current = this.parseHash();
+          this.render(false);
+        });
+        document.addEventListener("keydown", (e) => {
+          if (["ArrowRight", "PageDown", " "].includes(e.key)) {
+            e.preventDefault();
+            this.next();
+          }
+          if (["ArrowLeft", "PageUp"].includes(e.key)) {
+            e.preventDefault();
+            this.prev();
+          }
+          if (e.key === "Home") {
+            e.preventDefault();
+            this.goTo(1);
+          }
+          if (e.key === "End") {
+            e.preventDefault();
+            this.goTo(this.totalSlides);
+          }
+        });
+        let startX = 0;
+        addEventListener("touchstart", (e) => {
+          startX = e.changedTouches[0].clientX;
+        }, { passive: true });
+        addEventListener("touchend", (e) => {
+          const dx = e.changedTouches[0].clientX - startX;
+          if (Math.abs(dx) > 50) {
+            if (dx < 0) this.next();
+            else this.prev();
+          }
+        }, { passive: true });
+        document.querySelector(".hit.prev").onclick = () => this.prev();
+        document.querySelector(".hit.next").onclick = () => this.next();
+        addEventListener("pointermove", (e) => this.moveCursor(e.clientX, e.clientY), { passive: true });
+        addEventListener("touchmove", (e) => {
+          const touch = e.changedTouches && e.changedTouches[0];
+          if (touch) this.moveCursor(touch.clientX, touch.clientY);
+        }, { passive: true });
+      }
+      moveCursor(x, y) {
+        this.pointer = { x, y };
+        this.cursor.style.setProperty("--cursor-x", `${x}px`);
+        this.cursor.style.setProperty("--cursor-y", `${y}px`);
+      }
+      updateCursorVisibility() {
+        this.cursor.classList.toggle("visible", this.current >= this.cursorStartSlide);
+      }
+      scale() {
+        const factor = Math.min(innerWidth / 1920, innerHeight / 1080);
+        this.stage.style.transform = `translate(${(innerWidth - 1920 * factor) / 2}px, ${(innerHeight - 1080 * factor) / 2}px) scale(${factor})`;
+      }
+      syncVideo() {
+        if (this.current === 33) {
+          this.videoOverlay.classList.add("visible");
+          try {
+            this.videoOverlay.currentTime = 0;
+          } catch (error) {}
+          const play = this.videoOverlay.play();
+          if (play && play.catch) play.catch(() => {});
+        } else {
+          this.videoOverlay.pause();
+          this.videoOverlay.classList.remove("visible");
         }
-      });
-    });
-  }
-  revealFrame(){
-    const slide=this.slides[this.current];
-    if(!slide.classList.contains('has-red-frame')||this.revealedFrames.has(this.current))return false;
-    this.revealedFrames.add(this.current);
-    slide.classList.add('frame-revealed','frame-revealing');
-    slide.addEventListener('animationend',()=>slide.classList.remove('frame-revealing'),{once:true});
-    return true;
-  }
-  next(){
-    if(this.revealFrame())return;
-    if(this.current>=this.slides.length-1){
-      this.show(0);
-      return;
+      }
+      render(animate = true) {
+        this.slideImage.src = this.imageSrc(this.current);
+        if (this.frameSlides.has(this.current) && !this.revealedFrames.has(this.current)) {
+          this.redFrameCover.src = this.frameSrc(this.current);
+          this.redFrameCover.classList.remove("revealing");
+          this.redFrameCover.classList.add("visible");
+        } else {
+          this.redFrameCover.classList.remove("visible", "revealing");
+          this.redFrameCover.removeAttribute("src");
+        }
+        this.slide.classList.remove("entering");
+        if (animate) {
+          void this.slide.offsetWidth;
+          this.slide.classList.add("entering");
+        }
+        this.syncVideo();
+        this.updateCursorVisibility();
+        history.replaceState(null, "", `#${this.current}`);
+      }
+      revealFrame() {
+        if (!this.frameSlides.has(this.current) || this.revealedFrames.has(this.current)) return false;
+        this.revealedFrames.add(this.current);
+        this.redFrameCover.classList.add("revealing");
+        this.redFrameCover.addEventListener("animationend", () => {
+          this.redFrameCover.classList.remove("visible", "revealing");
+        }, { once: true });
+        return true;
+      }
+      goTo(n) {
+        this.current = n;
+        this.render();
+      }
+      next() {
+        if (this.revealFrame()) return;
+        this.current = this.current >= this.totalSlides ? 1 : this.current + 1;
+        this.render();
+      }
+      prev() {
+        this.current = this.current <= 1 ? this.totalSlides : this.current - 1;
+        this.render();
+      }
     }
-    this.show(this.current+1);
-  }
-  prev(){
-    if(this.current<=0){
-      this.show(this.slides.length-1);
-      return;
-    }
-    this.show(this.current-1);
-  }
-  show(index){
-    const next=Math.max(0,Math.min(index,this.slides.length-1));
-    if(next===this.current&&this.slides[next].classList.contains('active')){this.syncVideos();return}
-    const previous=this.current;
-    const direction=next>=previous?1:-1;
-    this.current=next;
-    this.slides.forEach((slide,i)=>{
-      slide.classList.remove('entering','leaving','frame-revealing');
-      slide.style.setProperty('--dir',direction);
-      const active=i===this.current;
-      slide.classList.toggle('active',active);
-      slide.classList.toggle('frame-revealed',this.revealedFrames.has(i));
-      slide.classList.toggle('video-focus',active&&slide.querySelector('video'));
-      slide.style.visibility=active?'visible':'hidden';
-      slide.style.opacity=active?'1':'0';
-      slide.style.pointerEvents=active?'auto':'none';
-      slide.style.zIndex=active?'2':'0';
-      if(active){void slide.offsetWidth;slide.classList.add('entering')}
-    });
-    history.replaceState(null,'','#'+(this.current+1));
-    this.syncVideos();
-    this.updateCursorVisibility();
-  }
-}
-try{
-  window.deck=new Deck();
-}catch(error){
-  console.error(error);
-}
-</script></body></html>
+    window.deck = new Deck();
+  </script>
+</body>
+</html>
