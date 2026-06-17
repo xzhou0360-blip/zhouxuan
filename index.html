@@ -148,7 +148,7 @@
   <div class="viewport">
     <main class="stage" id="stage">
       <section class="slide" id="slide">
-        <img class="slide-image" id="slideImage" src="" alt="">
+        <img class="slide-image" id="slideImage" src="rendered-webp/slide-001.webp?v=red-frame-reveal-3" alt="">
         <img class="red-frame-cover" id="redFrameCover" src="" alt="" aria-hidden="true">
         <video
           class="video-overlay"
@@ -156,7 +156,7 @@
           muted
           loop
           playsinline
-          preload="none"
+          preload="metadata"
           poster="ppt-faithful/media/slide-033-poster.png"
           src="ppt-faithful/media/media1.mp4"></video>
       </section>
@@ -175,7 +175,7 @@
         this.frameSlides = new Set([16, 17, 18, 23, 24, 25, 26, 27, 28, 29]);
         this.revealedFrames = new Set();
         this.cursorStartSlide = 15;
-        this.version = "red-frame-reveal-2";
+        this.version = "red-frame-reveal-3";
         this.slide = document.getElementById("slide");
         this.slideImage = document.getElementById("slideImage");
         this.redFrameCover = document.getElementById("redFrameCover");
@@ -253,8 +253,20 @@
         this.cursor.classList.toggle("visible", this.current >= this.cursorStartSlide);
       }
       scale() {
-        const factor = Math.min(innerWidth / 1920, innerHeight / 1080);
-        this.stage.style.transform = `translate(${(innerWidth - 1920 * factor) / 2}px, ${(innerHeight - 1080 * factor) / 2}px) scale(${factor})`;
+        const viewportWidth = Math.max(
+          window.innerWidth || 0,
+          document.documentElement.clientWidth || 0,
+          document.body ? document.body.clientWidth : 0,
+          1
+        );
+        const viewportHeight = Math.max(
+          window.innerHeight || 0,
+          document.documentElement.clientHeight || 0,
+          document.body ? document.body.clientHeight : 0,
+          1
+        );
+        const factor = Math.max(.01, Math.min(viewportWidth / 1920, viewportHeight / 1080));
+        this.stage.style.transform = `translate(${(viewportWidth - 1920 * factor) / 2}px, ${(viewportHeight - 1080 * factor) / 2}px) scale(${factor})`;
       }
       syncVideo() {
         if (this.current === 33) {
@@ -311,7 +323,20 @@
         this.render();
       }
     }
-    window.deck = new Deck();
+    const boot = () => {
+      if (window.deck) return;
+      window.deck = new Deck();
+      requestAnimationFrame(() => window.deck && window.deck.scale());
+      setTimeout(() => window.deck && window.deck.scale(), 120);
+      setTimeout(() => window.deck && window.deck.scale(), 480);
+    };
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", boot, { once: true });
+    } else {
+      boot();
+    }
+    addEventListener("load", () => window.deck && window.deck.scale(), { once: true });
+    addEventListener("pageshow", () => window.deck && window.deck.scale());
   </script>
 </body>
 </html>
